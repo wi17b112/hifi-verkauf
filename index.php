@@ -1,4 +1,5 @@
 <?php
+session_start();
 $section=null;
 if(isset($_GET['section'])){$section= $_GET['section'];}
 ?>
