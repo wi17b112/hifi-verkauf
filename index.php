@@ -15,6 +15,14 @@ if(isset($_GET['section'])){$section= $_GET['section'];}
 	 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 	
+        <script> function popitup() {
+       //auftragnummerx= document.getElementByID("auftragnummer").value;
+       //echo auftragnummer;
+        //var url2= String.concat(url,"?auftragnummer=",auftragnummerx);
+        newwindow=window.open("./inc/rechnungpopup.php?auftragnummer="+document.getElementById("auftragnummer").value,'height=200,width=150',"Rechnung legen");
+       if (window.focus) {newwindow.focus()}
+       return false;
+        }</script>
     </head>
     <body>
         <div class="container">
