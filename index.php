@@ -1,3 +1,7 @@
+<?php
+$section=null;
+if(isset($_GET['section'])){$section= $_GET['section'];}
+?>
 <html>
     <head>
         <meta charset="UTF-8">
@@ -28,5 +32,17 @@
         
         ?>
         </div>
+            <div class="col-md-9">
+			<main>
+                            <?php 
+                                /*switch ($section){
+                                    case 'kundenverwaltung':
+                                        include './inc/kundenverwaltung.inc.php';
+                                }*/
+                            if($section!=null){
+                            include './inc/'.$section.'.inc.php';}
+                            ?>
+			</main>
+		</div>		
     </body>
 </html>
