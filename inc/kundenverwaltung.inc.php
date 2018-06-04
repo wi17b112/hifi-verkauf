@@ -1,6 +1,6 @@
 <h1>Kundenverwatlung</h1>
 <div>
-<label for="email">KundenID</label>
+<label for="kundenid">KundenID</label>
 <input type="text" name="kundenid" id="kundenid" placeholder="KundenID">
 <button onclick="kundesuchen">Kunde suchen</button>
 </div>

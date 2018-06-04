@@ -22,7 +22,14 @@ if(isset($_GET['section'])){$section= $_GET['section'];}
         newwindow=window.open("./inc/rechnungpopup.php?auftragnummer="+document.getElementById("auftragnummer").value,'height=200,width=150',"Rechnung legen");
        if (window.focus) {newwindow.focus()}
        return false;
-        }</script>
+        }
+        function kundesuchen(kid){
+            
+        }
+        function artikelsuchen(artbez){
+            
+        }
+        </script>
     </head>
     <body>
         <div class="container">
