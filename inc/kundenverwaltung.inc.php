@@ -31,8 +31,13 @@
     <input type="text" class="form-control" name="hausnummer" id="hausnummer" placeholder="Hausnummer">
   </div>
   <div>
-  <label for="plz">PLZ</label>
-  <input type="number" class="form-control" name="plz" id="plz" placeholder="PLZ">
+  <label for="ort">Ort</label>
+  <select class="form-control" id="ort">
+    <option>1</option>
+    <option>2</option>
+    <option>3</option>
+    <option>4</option>
+  </select>
   </div>
   <br>
   <button type="submit" class="btn btn-default">Änderungen speichern</button>

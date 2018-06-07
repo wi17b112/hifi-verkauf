@@ -18,25 +18,25 @@ class kunde {
     private $mail=null;
     private $telefon=null;
     private $strasse=null;
+    private $hausnummer=null;
     private $ort=null;
     private $kundenstatus=null;
-    private $kundenbewertung=null;
     private $mitarbeiter=null;
     
-    function __construct($id, $vorname, $nachname, $mail, $telefon, $strasse, $ort, $kundenstatus, $kundenbewertung, $mitarbeiter) {
+    function __construct($id, $vorname, $nachname, $mail, $telefon, $strasse, $hausnummer, $ort, $kundenstatus, $mitarbeiter) {
         $this->id = $id;
         $this->vorname = $vorname;
         $this->nachname = $nachname;
         $this->mail = $mail;
         $this->telefon = $telefon;
         $this->strasse = $strasse;
+        $this->hausnummer = $hausnummer;
         $this->ort = $ort;
         $this->kundenstatus = $kundenstatus;
-        $this->kundenbewertung = $kundenbewertung;
         $this->mitarbeiter = $mitarbeiter;
     }
 
-    
+        
     function getId() {
         return $this->id;
     }
@@ -116,6 +116,16 @@ class kunde {
     function setMitarbeiter($mitarbeiter) {
         $this->mitarbeiter = $mitarbeiter;
     }
+    
+    function getHausnummer() {
+        return $this->hausnummer;
+    }
+
+    function setHausnummer($hausnummer) {
+        $this->hausnummer = $hausnummer;
+    }
+
+
 
 
 }

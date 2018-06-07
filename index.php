@@ -1,5 +1,7 @@
 <?php
 session_start();
+include './utility/db.class.php';
+include './model/kunde.class.php';
 $section=null;
 if(isset($_GET['section'])){$section= $_GET['section'];}
 ?>
@@ -24,11 +26,15 @@ if(isset($_GET['section'])){$section= $_GET['section'];}
        return false;
         }
         function kundesuchen(kid){
-            
+            $.post( "ajax/kunde.php", { personalnr: kid })
+				  .done(function( data ) {
+					//$( "main" ).html( data );
+                                        alert(data);
+				  });
         }
         function artikelsuchen(artbez){
             
-        }
+        }´
         </script>
     </head>
     <body>

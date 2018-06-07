@@ -367,34 +367,21 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `hifi`.`Kundenbewertung`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `hifi`.`Kundenbewertung` ;
-
-CREATE TABLE IF NOT EXISTS `hifi`.`Kundenbewertung` (
-  `KundenbewertungID` INT NOT NULL AUTO_INCREMENT,
-  `Gemahnt` TINYINT NULL,
-  `Umsatz` DOUBLE NULL,
-  PRIMARY KEY (`KundenbewertungID`))
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
 -- Table `hifi`.`Kunde`
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `hifi`.`Kunde` ;
 
 CREATE TABLE IF NOT EXISTS `hifi`.`Kunde` (
   `KundeID` INT NOT NULL AUTO_INCREMENT,
-  `Name` VARCHAR(45) NULL,
+  `Vorname` VARCHAR(45) NULL,
   `Mail` VARCHAR(45) NULL,
   `Telefon` VARCHAR(45) NULL,
   `Strasse` VARCHAR(45) NULL,
   `Hausnummer` INT NULL,
   `KundenstatusID` INT NULL,
   `MitarbeiterID` INT NULL,
-  `KundenbewertungID` INT NULL,
   `OrtID` INT NULL,
+  `Nachname` VARCHAR(45) NULL,
   PRIMARY KEY (`KundeID`),
   CONSTRAINT `Kundenstatus`
     FOREIGN KEY (`KundenstatusID`)
@@ -404,11 +391,6 @@ CREATE TABLE IF NOT EXISTS `hifi`.`Kunde` (
   CONSTRAINT `Mitarbeiter`
     FOREIGN KEY (`MitarbeiterID`)
     REFERENCES `hifi`.`Mitarbeiter` (`MitarbeiterID`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `Kundenbewertung`
-    FOREIGN KEY (`KundenbewertungID`)
-    REFERENCES `hifi`.`Kundenbewertung` (`KundenbewertungID`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `Ort`
@@ -421,8 +403,6 @@ ENGINE = InnoDB;
 CREATE INDEX `Kundenstatus_idx` ON `hifi`.`Kunde` (`KundenstatusID` ASC);
 
 CREATE INDEX `Mitarbeiter_idx` ON `hifi`.`Kunde` (`MitarbeiterID` ASC);
-
-CREATE INDEX `Kundenbewertung_idx` ON `hifi`.`Kunde` (`KundenbewertungID` ASC);
 
 CREATE INDEX `Ort_idx` ON `hifi`.`Kunde` (`OrtID` ASC);
 
@@ -518,6 +498,28 @@ ENGINE = InnoDB;
 CREATE INDEX `fk_Auftragsposition_Artikel1_idx` ON `hifi`.`Auftragsposition` (`ArtikelID` ASC);
 
 CREATE INDEX `fk_Kunden_Bestellung_idx` ON `hifi`.`Auftragsposition` (`KundenbestellungsID` ASC);
+
+
+-- -----------------------------------------------------
+-- Table `hifi`.`Kundenbewertung`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `hifi`.`Kundenbewertung` ;
+
+CREATE TABLE IF NOT EXISTS `hifi`.`Kundenbewertung` (
+  `KundenbewertungID` INT NOT NULL AUTO_INCREMENT,
+  `Gemahnt` TINYINT NULL,
+  `Umsatz` DOUBLE NULL,
+  `Kunde_KundeID` INT NOT NULL,
+  `Datum` DATETIME NULL,
+  PRIMARY KEY (`KundenbewertungID`),
+  CONSTRAINT `fk_Kundenbewertung_Kunde1`
+    FOREIGN KEY (`Kunde_KundeID`)
+    REFERENCES `hifi`.`Kunde` (`KundeID`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+CREATE INDEX `fk_Kundenbewertung_Kunde1_idx` ON `hifi`.`Kundenbewertung` (`Kunde_KundeID` ASC);
 
 
 -- -----------------------------------------------------
