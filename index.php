@@ -25,16 +25,29 @@ if(isset($_GET['section'])){$section= $_GET['section'];}
        if (window.focus) {newwindow.focus()}
        return false;
         }
-        function kundesuchen(kid){
-            $.post( "ajax/kunde.php", { personalnr: kid })
-				  .done(function( data ) {
-					//$( "main" ).html( data );
-                                        alert(data);
-				  });
+        </script>
+        <script>
+        function kundesuchen(){ 
+            console.log($("#kundenid").val());
+            $.post("ajax/kunde.php",{'kundenid' : $("#kundenid").val()}).done(function(response){
+                    var result= JSON.parse(response);
+                    console.log(result);
+                    if(result.response==true){
+                        var data = result.rows;
+                        $("#kid").val(data[0].kid);
+                        $("#vorname").val(data[0].vname);
+                        $("#nachname").val(data[0].nname);
+                        $("#email").val(data[0].mail);
+                        $("#telefon").val(data[0].telefon);
+                        $("#strasse").val(data[0].strasse);
+                        $("#hausnummer").val(data[0].hausnummer);
+                        $("#ort").val(data[0].oid);
+                        $("#mitarbeiter").val(data[0].mid);
+                    }else if (result.response == false) {
+                $('#kundenid').append('<option>Kein Kunde wurde gefunden!</option>');
+            }
+                })
         }
-        function artikelsuchen(artbez){
-            
-        }´
         </script>
     </head>
     <body>

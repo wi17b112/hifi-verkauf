@@ -31,18 +31,20 @@ class DB{
                                                 Hausnummer as hausnummer,
                                                 KundenstatusID as ksid,
                                                 MitarbeiterID as mid,
-                                                OrtID as oid,
+                                                OrtID as oid
 						from kunde
-						where KundeID = :id";
-			$statement = oci_parse($this->conn,$query);
-			oci_bind_by_name($statement,":id",$id);
-			$success = oci_execute($statement);
-		
-			while($eintrag = oci_fetch_object($statement)){
-				$kunde = new Kunde($eintrag->kid,$eintrag->vname,$eintrag->nname,$eintrag->mail,$eintrag->telefon,$eintrag->strasse,$eintrag->hausnummer,$eintrag->ort,$eintrag->ksid,$eintrag->mid);
-				array_push($this->kundenArray,$kunde);
-			}			
-			return $this->kundenArray;
+						where KundeID ='$id'";
+			//$query->bind_param('i',$id);
+                        //$query->execute();
+			$result = $this->conn->query($query);
+			if ($result->num_rows > 0) {
+                            $data = mysqli_fetch_all($result, MYSQLI_ASSOC);
+                            echo json_encode(['rows' => $data, 'response' => true]);
+                        }else {
+                            echo json_encode(['response' => false]);
+                        }
+                        //$result->close();
+                        $this->conn->close();
 		}	
 	}
         
@@ -54,6 +56,20 @@ class DB{
                             $query->bind_param('ssssiiis',$vorname,$mail,$tel,$strasse,$hnr,$mid,$ort,$nachname);
                             $query->execute();
                             printf("%d Row inserted.\n", $query->affected_rows);
+                            $query->close();
+                        }
+			$this->conn->close();                      
+        }
+	
+}
+function changeKunden($kid,$vorname,$nachname,$mail,$tel,$strasse,$hnr,$ort,$mid){
+            $this->doConnect();
+		if($this->conn){
+                        //var_dump($this->conn);
+                        if($query = $this->conn->prepare("update kunde set Vorname=?,Mail=?,Telefon=?,Strasse=?,Hausnummer=?,MitarbeiterID=?,OrtID=?,Nachname=? where KundeID=?")){
+                            $query->bind_param('ssssiiisi',$vorname,$mail,$tel,$strasse,$hnr,$mid,$ort,$nachname,$kid);
+                            $query->execute();
+                            printf("%d Row updated.\n", $query->affected_rows);
                             $query->close();
                         }
 			$this->conn->close();                      

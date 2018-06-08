@@ -20,5 +20,9 @@
 		<bezeichnung>Rechnung legen</bezeichnung>
 		<section>rechnunglegen</section>
 	</menuepunkt>
+        <menuepunkt>
+		<bezeichnung>Kundenbewertung</bezeichnung>
+		<section>kundenbewertung</section>
+	</menuepunkt>
 </navigation>
 
