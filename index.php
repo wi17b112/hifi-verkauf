@@ -46,8 +46,17 @@ if(isset($_GET['section'])){$section= $_GET['section'];}
                     }else if (result.response == false) {
                 $('#kundenid').append('<option>Kein Kunde wurde gefunden!</option>');
             }
-                })
+                });
         }
+        </script>
+        <script>
+            function artikelsuchen(){
+                console.log($("#artikelsuche").val());
+                $.post("ajax/artikelsuchen.php",{'aid':$("#artikelsuche").val()})
+                        .done(function(data){
+                            $("#artikels").append(data);
+                        });
+            }
         </script>
     </head>
     <body>
