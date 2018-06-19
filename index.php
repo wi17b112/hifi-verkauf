@@ -58,6 +58,13 @@ if(isset($_GET['section'])){$section= $_GET['section'];}
                         });
             }
         </script>
+        <script>
+            function allartikel(){
+                $.post("ajax/allartikel.php").done(function(data){
+                            $("#artikels").append(data);
+                        });
+            }
+        </script>
     </head>
     <body>
         <div class="container">

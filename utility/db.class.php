@@ -97,6 +97,23 @@ function getArtikel($aid){
                         }
 			
 }
+
+function allArtikels(){
+    $this->doConnect();
+		if($this->conn){
+                            $query = "select artikelid,artikelname,verkaufspreis,lagerstand,aktiv from artikel where aktiv=1";
+                            $result = $this->conn->query($query);
+                            if ($result->num_rows > 0) {
+                            while($obj = $result->fetch_object()){
+                                $artikel= new artikel($obj->artikelid, $obj->artikelname, $obj->verkaufspreis, $obj->lagerstand, $obj->aktiv);
+                                array_push($this->artikelArray,$artikel);
+                            }
+                            }
+                            
+                            $this->conn->close();
+                            return $this->artikelArray;
+                        }
+}
 }
 
 ?>
