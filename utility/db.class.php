@@ -114,6 +114,28 @@ function allArtikels(){
                             return $this->artikelArray;
                         }
 }
+
+function kundenbewertungDurchfuehren($mid){
+    $this->doConnect();
+		if($this->conn){
+                            $query = "select kundeid from kunde where mitarbeiterid='$mid'";
+                            /*select kundeid, sum(verkaufspreis) from kunde
+join kundenbestellung using(kundeid)
+join auftragsposition using(kundenbestellungsid)
+join artikel using(artikelid);*/
+
+                            $result = $this->conn->query($query);
+                            if ($result->num_rows > 0) {
+                            while($obj = $result->fetch_object()){
+                                $artikel= new artikel($obj->artikelid, $obj->artikelname, $obj->verkaufspreis, $obj->lagerstand, $obj->aktiv);
+                                array_push($this->artikelArray,$artikel);
+                            }
+                            }
+                            
+                            $this->conn->close();
+                            return $this->artikelArray;
+                        }
+}
 }
 
 ?>

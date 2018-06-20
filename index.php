@@ -16,7 +16,6 @@ if(isset($_GET['section'])){$section= $_GET['section'];}
         <link rel="stylesheet" href="res/css/verkauf.css">
 	 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-	
         <script> function popitup() {
        //auftragnummerx= document.getElementByID("auftragnummer").value;
        //echo auftragnummer;
@@ -63,6 +62,11 @@ if(isset($_GET['section'])){$section= $_GET['section'];}
                 $.post("ajax/allartikel.php").done(function(data){
                             $("#artikels").append(data);
                         });
+            }
+        </script>
+        <script>
+            function kundebewertung(){
+                $.post("ajax/kundenbewertung.php",{'mid':$("#mid").val()}).done(function(data){ $("#bewertungslist").append(data)});
             }
         </script>
     </head>
