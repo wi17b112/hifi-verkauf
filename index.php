@@ -65,8 +65,13 @@ if(isset($_GET['section'])){$section= $_GET['section'];}
             }
         </script>
         <script>
-            function kundebewertung(){
+            function kundenbewertung(){
                 $.post("ajax/kundenbewertung.php",{'mid':$("#mid").val()}).done(function(data){ $("#bewertungslist").append(data)});
+            }
+        </script>
+        <script>
+            function umsatzanzeigen(){
+                $.post("ajax/kundenumsatz.php",{'kid':$("#kundenid").val()}).done(function(data){ $("#").append(data)});
             }
         </script>
     </head>

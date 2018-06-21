@@ -136,6 +136,9 @@ join artikel using(artikelid);*/
                             return $this->artikelArray;
                         }
 }
+
+
+
 }
 
 ?>

@@ -24,5 +24,9 @@
 		<bezeichnung>Kundenbewertung</bezeichnung>
 		<section>kundenbewertung</section>
 	</menuepunkt>
+        <menuepunkt>
+		<bezeichnung>Kundenumsatz anzeigen</bezeichnung>
+		<section>kundenumsatz</section>
+	</menuepunkt>
 </navigation>
 
