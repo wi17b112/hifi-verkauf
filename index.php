@@ -2,6 +2,7 @@
 session_start();
 include './utility/db.class.php';
 include './model/kunde.class.php';
+include './model/zahlungsart.class.php';
 $section=null;
 if(isset($_GET['section'])){$section= $_GET['section'];}
 ?>

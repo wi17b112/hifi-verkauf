@@ -4,6 +4,11 @@ if(isset($_POST['artikel'])){
     $_SESSION['artikel']=$_POST['artikel'];
     $_SESSION['anzahlartikel']=$_POST['anzahlartikel'];
     
+    var_dump($_SESSION['artikel']);
+    
+   $db = new DB();
+   $zmitteln= $db->getZahlungsmittel();
+    
     echo "<h1>Bitte überprüfen Sie Ihre Daten</h1>";
     echo "<form action='index.php?section=bestellunganlegen&step=finish' method='post'>";
     
@@ -44,17 +49,20 @@ if(isset($_POST['artikel'])){
         echo "</tr>";
    */
    echo"</table>";
-   echo"</form>"; 
-   
+
+   echo"<label for='teillieferung'>Soll falls möglich eine Teillieferung durchgeführt werden?</label>";
+   echo "<input type='checkbox' name='teillieferung' id='teillieferung' value=1>";
    echo"<div>";
    echo"<label for='zahlung'>Zahlungsart</label>";
-   echo"<select class='form-control' id='ort' name='ort'>";
-   $db = new DB();
-   $zmitteln= $db->getZahlungsmittel();
-   foreach ($zmittel as $zmittel){
+   echo"<select class='form-control' id='zahlungsmittel' name='zahlungsmittel'>";
+   foreach ($zmitteln as $zmittel){
        echo"<option value='".$zmittel->getID()."'>".$zmittel->getArt()."</option>";
    }
   echo"</select>";
-}
+  
+  echo "<button class='btn btn-default'>Bezahlen</button>";
+  
+  echo"</form>"; 
+  echo "<button class='btn btn-default' onclick='history.back();'>Zurück</button>";
+   }
 ?>
-<option value=""></option>

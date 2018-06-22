@@ -140,17 +140,49 @@ join artikel using(artikelid);*/
 
 function getZahlungsmittel(){
     $this->doConnect();
-   $query = "select zahlungsbedingungkundeid,zahlungsart,zahlungsfrist from zahlungsbedingungkunde";
+   $query = "select ZahlungsbedingungKundeID,Zahlungsart,Zahllungsfrist from zahlungsbedingungkunde";
  $result = $this->conn->query($query);
                             if ($result->num_rows > 0) {
                             while($obj = $result->fetch_object()){
-                                $zart= new zahlungsart($obj->zahlungsbedingungkundeid, $obj->zahlungsart, $obj->zahlungsfrist);
+                                $zart= new zahlungsart($obj->ZahlungsbedingungKundeID, $obj->Zahlungsart, $obj->Zahllungsfrist);
                                 array_push($this->zahlungsartarray,$zart);
                             }
                             }
                             
                             $this->conn->close();
                             return $this->zahlungsartarray;
+}
+
+function bestellungAnlegen($kid,$zid,$teillieferung,$artikelid,$anzahl){
+                    $this->doConnect();
+                        //var_dump($this->conn);
+                    $now= "".date('Y-m-d H:i:s');  
+                    //$now= date_create()->format('YYYY-MM-DD HH:MM:SS');
+                    //var_dump($now);
+                    $query = "insert into kundenbestellung (KundeID, Status, ZahlungsbedingungKundeID, Bezahlt,Teillieferung, ErstellDatum, Gemahnt) values ($kid, 0, $zid, 0, $teillieferung, '$now' , 0)";
+                    //var_dump($query);
+                    $this->conn->query($query);
+                    echo "<br>";
+                    echo"-------------------------------------------";
+                    echo "<br>";
+                    $query= "select max(kundenbestellungsid) from kundenbestellung";
+                    $result= $this->conn->query($query);
+                    $kb= $result->fetch_assoc();
+                    var_dump($anzahl);
+                    $kbid= $kb["max(kundenbestellungsid)"];               
+                    echo "<br>";
+                    echo"--------------------------------";
+                    for($i=0 ; $i<sizeof($artikelid, 0);$i++){
+                        $ianz=(int)$anzahl[$i];
+                        $iart=(int)$artikelid[$i];
+                        $ikbid=(int)$kbid;
+                        $query= "insert into auftragsposition (Anzahl,ArtikelID,IstAbgezogen,KundenbestellungsID) values ($ianz,$iart,0,$kbid);";
+                        $this->conn->query($query);
+                    }
+                    echo $query;
+                    
+                    mysqli_error($this->conn);
+                    $this->conn->close();  
 }
 }
 ?>
