@@ -10,6 +10,7 @@ class DB{
 	private $conn = null;
 	private $kundenArray = array();
         private $artikelArray= array();
+        private $zahlungsartarray= array();
 	
 	function doConnect(){
 		//$this->conn = new mysqli($this->host,$this->user,$this->pwd); 
@@ -137,8 +138,19 @@ join artikel using(artikelid);*/
                         }
 }
 
-
-
+function getZahlungsmittel(){
+    $this->doConnect();
+   $query = "select zahlungsbedingungkundeid,zahlungsart,zahlungsfrist from zahlungsbedingungkunde";
+ $result = $this->conn->query($query);
+                            if ($result->num_rows > 0) {
+                            while($obj = $result->fetch_object()){
+                                $zart= new zahlungsart($obj->zahlungsbedingungkundeid, $obj->zahlungsart, $obj->zahlungsfrist);
+                                array_push($this->zahlungsartarray,$zart);
+                            }
+                            }
+                            
+                            $this->conn->close();
+                            return $this->zahlungsartarray;
 }
-
+}
 ?>

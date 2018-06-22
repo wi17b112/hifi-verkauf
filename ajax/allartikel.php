@@ -14,7 +14,8 @@ foreach($artikeln as $artikel){
 		echo "<td>".$artikel->getArtikelname()."</td>";
 		echo "<td>".$artikel->getVerkaufspreis()."</td>";			
 		echo "<td>".$artikel->getLagerstand()."</td>";	
-                echo "<td><input type='checkbox' id=".$artikel->getArtikelname()." name='artikel[]' value=".$artikel->getArtikelID()."></td>";
+                echo "<td><input type='checkbox' id=".$artikel->getArtikelname()." name='artikel[]' value=".$artikel->getArtikelID()." onclick='enable(".$artikel->getArtikelname().")'></td>";
+                echo "<td><input type='number' name='anzahlartikel[]' id='".$artikel->getArtikelname()."x'  min='1' placeholder='Anzahl' disabled='true'></td";
         echo "</tr>";
     }
 ?>

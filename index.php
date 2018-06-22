@@ -74,6 +74,26 @@ if(isset($_GET['section'])){$section= $_GET['section'];}
                 $.post("ajax/kundenumsatz.php",{'kid':$("#kundenid").val()}).done(function(data){ $("#").append(data)});
             }
         </script>
+        <script>
+            function enable(fieldid){
+                console.log(fieldid.id);
+                var checked= fieldid.checked;
+                console.log(checked);
+                if(checked){
+                    document.getElementById(fieldid.id+"x").disabled=false;
+                }else{
+                    document.getElementById(fieldid.id+"x").disabled=true;
+                }
+    }
+        </script>
+        <script>
+            function getartikel(artikel,anzahl){
+                $.post("ajax/artikelinfo.php",{'aid':artikel,'anz':anzahl})
+                        .done(function(data){
+                            $("#artikeln").append(data);
+                        });
+            }
+        </script>
     </head>
     <body>
         <div class="container">

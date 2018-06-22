@@ -7,8 +7,11 @@
         if($_GET['step']=="artikel"){
             include './inc/kundenbestellung/artikelwaehlen.inc.php';
         }
-        if($_GET['step']=="lieferung"){
-            include './inc/kundenbestellung/lieferbedingung.inc.php';
+        if($_GET['step']=="checkpage"){
+            include './inc/kundenbestellung/checkpage.inc.php';
+        }
+        if($_GET['step']=="finish"){
+            include './inc/kundenbestellung/finish.inc.php';
         }
     }
 ?>
