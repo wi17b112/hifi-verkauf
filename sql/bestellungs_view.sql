@@ -4,12 +4,10 @@ from kunde
 join kundenbestellung using(kundeid)
 join kundenstatus using(kundenstatusid)
 join auftragsposition using(kundenbestellungsid)
-join artikel using(artikelid)
+join artikel using(artikelid);
 
-select * from bestellungsumsatz_view
-select * from kundenbestellung
-select * from kundenstatus
-
-select kundeid,vorname,nachname,kundenbestellungsid,sum(umsatz)
- from bestellungsumsatz_view where kundeid=$kid
+CREATE OR REPLACE VIEW `auftragsposition_view` AS
+select Kundenbestellungsid, artikelid,artikelname, verkaufspreis,anzahl, (verkaufspreis*anzahl) as gesamt
+from auftragsposition
+join artikel using(artikelid);
 
