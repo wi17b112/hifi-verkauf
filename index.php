@@ -21,7 +21,10 @@ if(isset($_GET['section'])){$section= $_GET['section'];}
        //auftragnummerx= document.getElementByID("auftragnummer").value;
        //echo auftragnummer;
         //var url2= String.concat(url,"?auftragnummer=",auftragnummerx);
-        newwindow=window.open("./inc/rechnungpopup.php?auftragnummer="+document.getElementById("auftragnummer").value,'height=200,width=150',"Rechnung legen");
+        //newwindow=window.open('./inc/rechnungpopup.php?auftragnummer='+document.getElementById('auftragnummer').value,'width=400,height=400','Rechnung legen');
+        newwindow=window.open("./inc/rechnungpopup.php?auftragnummer="+document.getElementById("auftragnummer").value,"Rechnung legen","width=700, height=800");
+        newwindow.moveTo(700,150);
+       // newwindow.resizeTo(400,400);
        if (window.focus) {newwindow.focus()}
        return false;
         }

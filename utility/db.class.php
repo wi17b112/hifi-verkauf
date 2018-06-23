@@ -12,6 +12,7 @@ class DB{
         private $artikelArray= array();
         private $zahlungsartarray= array();
         private $umsatzarray= array();
+        private $bestellungsartikel= array();
 	
 	function doConnect(){
 		//$this->conn = new mysqli($this->host,$this->user,$this->pwd); 
@@ -193,6 +194,63 @@ function getUmsatze($kid){
                             }
                             $this->conn->close();  
                             return $this->umsatzarray;
-}   
+}  
+
+   function getBestellung($bid){
+       $this->doConnect();
+       $query ="select kundeid,kundenbestellungsid,status,ZahlungsbedingungKundeID,bezahlt,teillieferung,erstelldatum,gemahnt from kundenbestellung where kundenbestellungsid=$bid";
+       $result= $this->conn->query($query);
+       
+      if ($result->num_rows > 0) {
+                            $obj=$result->fetch_object();
+                            $bestellung= new kundenbestellung($obj->kundeid, $obj->kundenbestellungsid, $obj->status, $obj->ZahlungsbedingungKundeID, $obj->bezahlt,$obj->teillieferung, $obj->erstelldatum, $obj->gemahnt);
+                            
+                            
+      }
+                            $this->conn->close();  
+                            return $bestellung;
+   }
+   
+   function getKunde($kid){
+       $this->doConnect();
+		if($this->conn){
+			$query = "select kundeid, 
+						vorname,
+						nachname, 
+						mail,						
+						telefon,
+						strasse,
+                                                hausnummer,
+                                                kundenstatusid,
+                                                mitarbeiterid,
+                                                ortid
+						from kunde
+						where kundeid ='$kid'";
+			//$query->bind_param('i',$id);
+                        //$query->execute();
+			$result = $this->conn->query($query);
+			if ($result->num_rows > 0) {
+                            $obj = $result->fetch_object();
+                            $kunde= new kunde($obj->kundeid, $obj->vorname, $obj->nachname, $obj->mail,$obj->telefon,$obj->strasse, $obj->hausnummer, $obj->ortid, $obj->kundenstatusid, $obj->mitarbeiterid);
+                        }
+                        //$result->close();
+                        $this->conn->close();
+                        return $kunde;
+		}	
+   }
+   function getBestellungsArtikeln($bid){
+       $this->doConnect();
+       $query= "select kundenbestellungsid,artikelid,artikelname,verkaufspreis,anzahl,gesamt from auftragsposition_view where kundenbestellungsid=$bid";
+       $result = $this->conn->query($query);
+       
+       if ($result->num_rows > 0) {
+                            while($obj = $result->fetch_object()){
+                                $artikel= new bestellungsartikel($obj->Kundenbestellungsid, $obj->artikelid, $obj->artikelname, $obj->verkaufspreis, $obj->anzahl, $obj->gesamt);
+                                array_push($this->bestellungsartikel,$artikel);
+                            }
+                            }
+                            $this->conn->close();  
+                            return $this->bestellungsartikel;
+   }
 }
 ?>
