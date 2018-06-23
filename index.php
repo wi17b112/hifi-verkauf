@@ -72,7 +72,7 @@ if(isset($_GET['section'])){$section= $_GET['section'];}
         </script>
         <script>
             function umsatzanzeigen(){
-                $.post("ajax/kundenumsatz.php",{'kid':$("#kundenid").val()}).done(function(data){ $("#").append(data)});
+                $.post("ajax/kundenumsatz.php",{'kid':$("#kundenid").val()}).done(function(data){ $("#umsatztable").append(data)});
             }
         </script>
         <script>

@@ -11,6 +11,7 @@ class DB{
 	private $kundenArray = array();
         private $artikelArray= array();
         private $zahlungsartarray= array();
+        private $umsatzarray= array();
 	
 	function doConnect(){
 		//$this->conn = new mysqli($this->host,$this->user,$this->pwd); 
@@ -162,16 +163,10 @@ function bestellungAnlegen($kid,$zid,$teillieferung,$artikelid,$anzahl){
                     $query = "insert into kundenbestellung (KundeID, Status, ZahlungsbedingungKundeID, Bezahlt,Teillieferung, ErstellDatum, Gemahnt) values ($kid, 0, $zid, 0, $teillieferung, '$now' , 0)";
                     //var_dump($query);
                     $this->conn->query($query);
-                    echo "<br>";
-                    echo"-------------------------------------------";
-                    echo "<br>";
                     $query= "select max(kundenbestellungsid) from kundenbestellung";
                     $result= $this->conn->query($query);
                     $kb= $result->fetch_assoc();
-                    var_dump($anzahl);
                     $kbid= $kb["max(kundenbestellungsid)"];               
-                    echo "<br>";
-                    echo"--------------------------------";
                     for($i=0 ; $i<sizeof($artikelid, 0);$i++){
                         $ianz=(int)$anzahl[$i];
                         $iart=(int)$artikelid[$i];
@@ -184,5 +179,20 @@ function bestellungAnlegen($kid,$zid,$teillieferung,$artikelid,$anzahl){
                     mysqli_error($this->conn);
                     $this->conn->close();  
 }
+
+function getUmsatze($kid){
+    $this->doConnect();
+    $query= "select kundeid,vorname,nachname,kundenbestellungsid,umsatz from bestellungsumsatz_view where kundeid=$kid";
+    $result=$this->conn->query($query);
+    
+    if ($result->num_rows > 0) {
+                            while($obj = $result->fetch_object()){
+                                $umsatz= new umsatz($obj->kundeid,$obj->vorname,$obj->nachname,$obj->kundenbestellungsid,$obj->umsatz);
+                                array_push($this->umsatzarray,$umsatz);
+                            }
+                            }
+                            $this->conn->close();  
+                            return $this->umsatzarray;
+}   
 }
 ?>
