@@ -13,6 +13,7 @@ class DB{
         private $zahlungsartarray= array();
         private $umsatzarray= array();
         private $bestellungsartikel= array();
+        private $ortarray= array();
 	
 	function doConnect(){
 		//$this->conn = new mysqli($this->host,$this->user,$this->pwd); 
@@ -251,6 +252,20 @@ function getUmsatze($kid){
                             }
                             $this->conn->close();  
                             return $this->bestellungsartikel;
+   }
+   function getOrte(){
+       $this->doConnect();
+       $query="select ortid,plz,bezeichnung,landid from ort";
+       $result = $this->conn->query($query);
+       
+       if ($result->num_rows > 0) {
+                            while($obj = $result->fetch_object()){
+                                $ort= new ort($oby->ortid,$obj->plz,$obj->bezeichnung,$obj->landid);
+                                array_push($this->ortarray,$ort);
+                            }
+                            }
+                            $this->conn->close();  
+                            return $this->ortarray;
    }
 }
 ?>

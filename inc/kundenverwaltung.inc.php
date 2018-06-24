@@ -44,11 +44,16 @@
   </div>
   <div>
   <label for="ort">Ort</label>
-  <select class="form-control" id="ort" name="ort">
-    <option>1</option>
-    <option>2</option>
-    <option>3</option>
-    <option>4</option>
+<select class="form-control" id="ort" name="ort">
+    <option value="" disabled selected>Ort wählen</option>
+  <?php
+  $db= new DB();
+  $orte=$db->getOrte();
+  foreach ($orte as $ort){
+      var_dump($ort);
+      echo "<option value=".$ort->getID().">".$ort->getPlz()." ".$ort->getBez()."</option>";
+  }
+  ?>
   </select>
   <label for="mitarbeiter">Mitarbeiter</label>
     <input type="text" class="form-control" name="mitarbeiter" id="mitarbeiter" placeholder="Mitarbeiter">

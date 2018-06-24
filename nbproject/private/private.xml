@@ -3,9 +3,12 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+            <file>file:/C:/xampp/htdocs/hifi-verkauf/sql/bestellungs_view.sql</file>
             <file>file:/C:/xampp/htdocs/hifi-verkauf/index.php</file>
-            <file>file:/C:/xampp/htdocs/hifi-verkauf/inc/kundenbestellung/finish.inc.php</file>
+            <file>file:/C:/xampp/htdocs/hifi-verkauf/inc/rechnunglegen.inc.php</file>
             <file>file:/C:/xampp/htdocs/hifi-verkauf/utility/db.class.php</file>
+            <file>file:/C:/xampp/htdocs/hifi-verkauf/inc/kundenumsatz.inc.php</file>
+            <file>file:/C:/xampp/htdocs/hifi-verkauf/inc/rechnungpopup.php</file>
         </group>
     </open-files>
 </project-private>

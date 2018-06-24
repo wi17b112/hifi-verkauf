@@ -3,7 +3,13 @@ session_start();
 include './utility/db.class.php';
 include './model/kunde.class.php';
 include './model/zahlungsart.class.php';
+include './model/ort.class.php';
 $section=null;
+if(isset($_POST['role'])){$_SESSION['role']= $_POST['role'];}
+if(!isset($_SESSION['role'])){
+    header("Location: role.php"); /* Redirect browser */
+    exit();
+}
 if(isset($_GET['section'])){$section= $_GET['section'];}
 ?>
 <html>

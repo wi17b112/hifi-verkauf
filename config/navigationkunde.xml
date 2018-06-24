@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<navigation>
+	<menuepunkt>
+		<bezeichnung>Neue Bestellung anlegen</bezeichnung>
+		<section>bestellunganlegen</section>
+	</menuepunkt>
+        <menuepunkt>
+		<bezeichnung>Artikel suchen</bezeichnung>
+		<section>artikelsuchen</section>
+	</menuepunkt>
+        <menuepunkt>
+		<bezeichnung>Rechnung legen</bezeichnung>
+		<section>rechnunglegen</section>
+	</menuepunkt>
+        <menuepunkt>
+		<bezeichnung>Kundenumsatz anzeigen</bezeichnung>
+		<section>kundenumsatz</section>
+	</menuepunkt>
+</navigation>
+
