@@ -1,4 +1,5 @@
 <?php
+error_reporting(0);
 session_start();
 include './utility/db.class.php';
 include './model/kunde.class.php';

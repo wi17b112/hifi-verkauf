@@ -4,8 +4,6 @@ if(isset($_POST['artikel'])){
     $_SESSION['artikel']=$_POST['artikel'];
     $_SESSION['anzahlartikel']=$_POST['anzahlartikel'];
     
-    var_dump($_SESSION['artikel']);
-    
    $db = new DB();
    $zmitteln= $db->getZahlungsmittel();
     

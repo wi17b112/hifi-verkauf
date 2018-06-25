@@ -163,8 +163,9 @@ function bestellungAnlegen($kid,$zid,$teillieferung,$artikelid,$anzahl){
                     $now= "".date('Y-m-d H:i:s');  
                     //$now= date_create()->format('YYYY-MM-DD HH:MM:SS');
                     //var_dump($now);
+                    if(isset($teillieferung)){
                     $query = "insert into kundenbestellung (KundeID, Status, ZahlungsbedingungKundeID, Bezahlt,Teillieferung, ErstellDatum, Gemahnt) values ($kid, 0, $zid, 0, $teillieferung, '$now' , 0)";
-                    //var_dump($query);
+                    }else{$query = "insert into kundenbestellung (KundeID, Status, ZahlungsbedingungKundeID, Bezahlt,Teillieferung, ErstellDatum, Gemahnt) values ($kid, 0, $zid, 0, 0, '$now' , 0)";}
                     $this->conn->query($query);
                     $query= "select max(kundenbestellungsid) from kundenbestellung";
                     $result= $this->conn->query($query);
@@ -177,7 +178,6 @@ function bestellungAnlegen($kid,$zid,$teillieferung,$artikelid,$anzahl){
                         $query= "insert into auftragsposition (Anzahl,ArtikelID,IstAbgezogen,KundenbestellungsID) values ($ianz,$iart,0,$kbid);";
                         $this->conn->query($query);
                     }
-                    echo $query;
                     
                     mysqli_error($this->conn);
                     $this->conn->close();  
