@@ -1,5 +1,6 @@
 <?php
     if(isset($_POST['vorname'])){
+        var_dump($_POST);
          $db= new DB();
          $db->addKunden($_POST['vorname'], $_POST['nachname'], $_POST['email'], $_POST['telefon'], $_POST['strasse'], $_POST['hausnummer'], $_POST['ort'], $_POST['mitarbeiter']);
     }
@@ -31,14 +32,13 @@
   </div>
   <div>
   <label for="ort">Ort</label>
-  <select class="form-control" id="ort" name="ort">
-      <option value="" disabled selected>Ort wählen</option>
+  <select class="form-control" id="ort" name="ort"  >
+      <option value="" selected disabled>Ort wählen</option>
   <?php
   $db= new DB();
   $orte=$db->getOrte();
   foreach ($orte as $ort){
-      var_dump($ort);
-      echo "<option value=".$ort->getID().">".$ort->getPlz()." ".$ort->getBez()."</option>";
+      echo "<option value=".$ort->getId().">".$ort->getPlz()." ".$ort->getBez()."</option>";
   }
   ?>
   </select>

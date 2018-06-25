@@ -260,7 +260,7 @@ function getUmsatze($kid){
        
        if ($result->num_rows > 0) {
                             while($obj = $result->fetch_object()){
-                                $ort= new ort($oby->ortid,$obj->plz,$obj->bezeichnung,$obj->landid);
+                                $ort= new ort($obj->ortid,$obj->plz,$obj->bezeichnung,$obj->landid);
                                 array_push($this->ortarray,$ort);
                             }
                             }
