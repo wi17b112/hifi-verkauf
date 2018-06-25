@@ -100,12 +100,12 @@ if(isset($_POST['kidbw'])){
         <script>
             function enable(fieldid){
                 console.log(fieldid.id);
-                var checked= fieldid.checked;
+                var checked= document.getElementById(fieldid.id).disabled;
                 console.log(checked);
-                if(checked){
-                    document.getElementById(fieldid.id+"x").disabled=false;
+                if(checked==true){
+                    document.getElementById(fieldid.id).disabled=false;
                 }else{
-                    document.getElementById(fieldid.id+"x").disabled=true;
+                    document.getElementById(fieldid.id).disabled=true;
                 }
     }
         </script>
