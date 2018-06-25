@@ -14,6 +14,7 @@ class DB{
         private $umsatzarray= array();
         private $bestellungsartikel= array();
         private $ortarray= array();
+        private $kundenbarray= array();
 	
 	function doConnect(){
 		//$this->conn = new mysqli($this->host,$this->user,$this->pwd); 
@@ -266,6 +267,28 @@ function getUmsatze($kid){
                             }
                             $this->conn->close();  
                             return $this->ortarray;
+   }
+   function getKundenUmsatz($from,$until,$mid){
+       $this->doConnect();
+       $query="select kundeid,sum(umsatz)as umsatzg,sum(gemahnt)as gemahntg,kundenstatusid from bestellungsumsatz_view where (erstelldatum between '$from' and '$until')&& mitarbeiterid=$mid group by kundeid";
+       $result = $this->conn->query($query);
+       
+       
+       if ($result->num_rows > 0) {
+                            while($obj = $result->fetch_object()){
+                                $kb= new kundenbewertung($obj->kundeid,$obj->umsatzg,$obj->gemahntg,$obj->kundenstatusid);
+                                array_push($this->kundenbarray,$kb);
+                            }
+                            }
+                            $this->conn->close();  
+                            return $this->kundenbarray;
+   }
+   
+   function kundenstatusUpdate($kid,$kundenstatusnew){
+       $this->doConnect();
+       $query="update kunde set kundenstatusid= $kundenstatusnew where kundeid=$kid";
+       $result = $this->conn->query($query);
+       $this->conn->close(); 
    }
 }
 ?>

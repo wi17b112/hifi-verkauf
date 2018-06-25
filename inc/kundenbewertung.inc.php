@@ -9,13 +9,13 @@
 <input type="date" name="enddate" id="enddate">
 <input type="text" name="mid" id="mid" placeholder="MitarbeiterID">
 <button class="btn btn-default" name="anzeigen" id="anzeigen" onclick="kundenbewertung()">Anzeigen</button>
-<button class="btn btn-default" name="speichern" id="speichern" disabled="True">Speichern</button>
-<form>
-    <table id="bewertungslist" class="table table-hover">
+<form action="index.php" method="post">
+    <table id="bewertungslist" name="bewertungslist" class="table table-hover">
         <th>KundenID</th>
         <th>Umsatz</th>
         <th>Mahnung</th>
         <th>Von</th>
         <th>Zu</th>
     </table>
+    <button class="btn btn-default" name="speichern" id="speichern" disabled="True">Speichern</button>
 </form>

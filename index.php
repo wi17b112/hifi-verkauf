@@ -11,6 +11,18 @@ if(!isset($_SESSION['role'])){
     exit();
 }
 if(isset($_GET['section'])){$section= $_GET['section'];}
+
+if(isset($_POST['kidbw'])){
+    $kidbw= $_POST['kidbw'];
+    $kundenstatusbw= $_POST['kundenstatusbw'];
+    $db= new DB();
+    
+    for($i=0; $i<sizeof($kidbw,0);$i++){
+        $kid=(int)$kidbw[$i];
+        $kundenstatusnew= (int)$kundenstatusbw[$i];
+        $db->kundenstatusUpdate($kid, $kundenstatusnew);
+    }
+}
 ?>
 <html>
     <head>
@@ -76,7 +88,8 @@ if(isset($_GET['section'])){$section= $_GET['section'];}
         </script>
         <script>
             function kundenbewertung(){
-                $.post("ajax/kundenbewertung.php",{'mid':$("#mid").val()}).done(function(data){ $("#bewertungslist").append(data)});
+                $.post("ajax/kundenbewertung.php",{'mid':$("#mid").val(),'startdate':$("#startdate").val(),'enddate':$("#enddate").val()}).done(function(data){ $("#bewertungslist").append(data)});
+                document.getElementById("speichern").disabled=false;
             }
         </script>
         <script>
@@ -102,6 +115,11 @@ if(isset($_GET['section'])){$section= $_GET['section'];}
                         .done(function(data){
                             $("#artikeln").append(data);
                         });
+            }
+        </script>
+        <script>
+            function saveKundenbewertung(){
+                
             }
         </script>
     </head>
